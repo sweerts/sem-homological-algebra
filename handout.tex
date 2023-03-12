@@ -1,0 +1,108 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hier kommen Einstellungen
+
+% Seitenränder
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	left=30mm,
+	right=30mm,
+	top=35mm,
+	bottom=35mm,
+}
+
+\usepackage{amssymb, amsfonts, amsbsy, amsmath, amsthm}
+\usepackage[english]{babel}
+\usepackage{enumitem}
+
+% Bibliographie
+\usepackage[german=quotes]{csquotes}
+\usepackage[backend=biber, style=alphabetic, url=false, isbn=false, maxbibnames=99, giveninits=true]{biblatex}
+\renewbibmacro{in:}{}
+\addbibresource{literatur.bib}
+
+% Graphik und kommutative Diagramme
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[all,cmtip]{xy}
+
+% Etwas Farbe, man kann sogar per rgb Wert definieren
+\usepackage{color}
+\newcommand{\black}{\color{black}}
+\newcommand{\red}{\color{red}}
+\newcommand{\green}{\color{dgreen}}
+\newcommand{\blue}{\color{blue}}
+\newcommand{\magenta}{\color{magenta}}
+\definecolor{darkblue}{rgb}{0,0,.5}
+
+% Das macht, dass man im pdf auf die Verweise klicken kann
+\usepackage[colorlinks,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkblue]{hyperref}
+
+% Fuer Randbemerkungen
+\usepackage{marginnote}
+\usepackage[color]{changebar}
+\changebarsep0.2cm
+\changebarwidth0.03cm
+\cbcolor{red}
+
+
+% Ringe und Körper
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\C}{{\mathbb C}}
+
+% Potenzmenge
+\renewcommand{\P}{{\mathfrak P}}
+
+% Abbildungen
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Abb}{\operatorname{Abb}}
+
+% Kategorien
+\newcommand{\cat}[2]{\operatorname{#1}(#2)}
+
+% Theorem Definitionen mit durchlaufender Numerierung
+%\swapnumbers
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+%\theoremstyle{plain}
+\newtheorem{remark}{Remark}[subsection]
+\newtheorem{example}{Example}[subsection]
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{algorithm}{Algorithm}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem{assumption}{Assumption}[subsection]
+\newtheorem{axiom}{Axiom}[subsection]
+\newtheorem{exercise}{Exercise}[subsection]
+
+% Beweise
+%\renewcommand{\proofname}{Proof}
+
+\title{Derived Functors}
+\author{Steffen Weerts}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jetzt kommt der Text
+
+\begin{document}
+	\maketitle
+	
+	\input{sections/01_introduction.tex}
+	\input{sections/02_derived_functors.tex}
+
+	\printbibliography[
+		heading=bibintoc,
+		title={Bibliography}
+	]
+\end{document}
+
+
