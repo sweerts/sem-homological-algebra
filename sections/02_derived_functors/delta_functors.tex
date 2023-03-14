@@ -1,0 +1,116 @@
+\subsection{$\delta$-Functors}
+
+\begin{notation}
+	In this talk, we will use $\mathcal{A}$ and $\mathcal{B}$ as names for two arbitrary abelian categories.
+\end{notation}
+
+\begin{definition}
+	A (covariant) homological $\delta$-functor between $\mathcal{A}$ and $\mathcal{B}$ is a collection of additive functors $T_n:\mathcal{A}\rightarrow\mathcal{B}$ for $n\geq0$, together with morphisms
+	$$\delta_n:T_n(C)\rightarrow T_{n-1}(A)$$
+	defined for each short exact sequence $0\rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ in $\mathcal{A}$.
+	We will assume that $T_n = 0$ for $n<0$. \\
+	The following two conditions are imposed:
+	\begin{enumerate}[label=\arabic*.]
+		\item For each short exact sequence $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$, there is a long exact sequence
+		$$\dots T_{n+1}(C) \overset{\delta}{\rightarrow} T_n(A) \rightarrow T_n(B) \rightarrow T_n(C) \overset{\delta}{\rightarrow} T_{n-1}(A) \dots$$
+		In particular, $T_0$ is right exact, and $T^0$ is left exact.
+		
+		\item For each morphism of short exact sequences from $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$ to $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$, the $\delta$'s give a commutative diagram
+		\begin{align*}
+			\begin{gathered}
+				\xymatrixcolsep{5pc}\xymatrixcolsep{2pc}\xymatrix{
+					T_n(C') \ar[r]^{\delta} \ar[d] & T_{n-1}(A') \ar[d] \\
+					T_n(C) \ar[r]^{\delta} & T_{n-1}(A). }
+			\end{gathered}
+		\end{align*}
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	Homology gives a homological $\delta$-functor $H_*$ from $\ch_{\geq0}\cat{A}$ to $\cat{A}$.
+\end{example}
+
+\begin{exercise}
+	Let $\mathcal{S}$ be the category of short exact sequences
+	\begin{equation}
+		0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0 \tag{\textasteriskcentered}
+	\end{equation}
+	in $\mathcal{A}$. \\
+	Then $\delta_i$ is a natural transformation from the functor $F$ sending (\textasteriskcentered) to $T_i(C)$ to the functor $G$ sending (\textasteriskcentered) to $T_{i-1}(A)$.
+\end{exercise}
+
+\begin{proof}
+	Let $f:\mathcal{S}\rightarrow\mathcal{S}$ be a morphism of short exact sequences, and let $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$ (\textasteriskcentered') be the image of $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ (\textasteriskcentered) under $f$. \\
+	By definition, we know that
+	\begin{align*}
+		\begin{CD}
+			F(\textasteriskcentered) @= T_i(C) @>\delta>> T_{i-1}(A) @= G(\textasteriskcentered) \\
+			@.  				@VVF(f)V 			@VG(f)VV 			@. \\
+			F(\textasteriskcentered') @= T_i(C') @>\delta>> T_{i-1}(A') @= G(\textasteriskcentered').
+		\end{CD}
+	\end{align*}
+	commutes.
+	Therefore, $\delta_i$ is a natural transformation.
+\end{proof}
+
+\begin{example}[p-torsion]
+	If $p$ is an integer, the functors $T_0(A)=A/pA$ and 
+	$$T_1(A) = {_p}A \equiv \{a\in A:pa=0\}$$
+	fit together to form a homological $\delta$-functor, or a cohomological $\delta$-functor (with $T^0=T_1$ and $T^1=T_0$) from \textbf{Ab} to \textbf{Ab}.\\
+	We can apply the \hyperref[snake_lemma]{Snake Lemma} to the commutative diagram
+	\begin{align*}
+		\begin{CD}
+			0 @>>> A @>>> B @>>> C @>>> 0 \\
+			@.	 @VpVV	 @VpVV	@VpVV  @. \\
+			0 @>>> A @>>> B @>>> C @>>> 0 \\
+		\end{CD}
+	\end{align*}
+	to get an exact sequence
+	$$0 \rightarrow {_p}A \rightarrow {_p}B \rightarrow {_p}C \overset{\delta}{\longrightarrow} A/pA \rightarrow B/pB \rightarrow C/pC \rightarrow 0.$$
+\end{example}
+
+\begin{definition}
+	A \textit{morphism} $S \rightarrow T$ of $\delta$-functor is a system of natural transformations $S_n \rightarrow T_n$ (resp. $S^n \rightarrow T^n$) that commute with $\delta$, i. e. for every short exact sequence $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ the diagram
+	\begin{align*}
+		\begin{CD}
+			\dots @>>> S_{n+1}(C) @>\delta_{n+1}>> S_n(A) @>>> S_n(B) @>>> S_n(C) @>\delta_n>> \dots \\
+			@.			@VVV						@VVV		@VVV		@VVV				@. \\
+			\dots @>>> T_{n+1}(C) @>\delta_{n+1}>> T_n(A) @>>> T_n(B) @>>> T_n(C) @>\delta_n>> \dots			
+		\end{CD}
+	\end{align*}
+	commutes. \\
+	A homological $\delta$-functor $T$ is \textit{universal} if, given any other $\delta$-functor $S$ and a natural transformation $f_0:S_0\rightarrow T_0$, there exists a unique morphism $\{f_n:S_n\rightarrow T_n\}$ of $\delta$-functors extending $f_0$. \\
+	A cohomological $\delta$-functor $T$ is \textit{universal} if, given any other $\delta$-functor $S$ and a natural transformation $f^0:S^0\rightarrow T^0$, there exists a unique morphism $T\rightarrow S$ of $\delta$-functors extending $f_0$.
+\end{definition}
+
+\begin{example}
+	We will see that homology $H_*:\ch_{\geq0}(\cat{A}) \rightarrow \cat{A}$ and cohomology $H^*:\ch_{\geq0}(\cat{A})$ are universal $\delta$-functors.
+\end{example}
+
+\begin{exercise}
+	If $F:\cat{A}\rightarrow\cat{B}$ is an exact functor, then $T_0=F$ and $T_n=0$ for $n\neq0$ defines a universal $\delta$-functor (of both homological and cohomological type).
+\end{exercise}
+
+\begin{proof}
+	Let $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ be a short exact sequence in $\cat{A}$. \\
+	Consider any morphism $$\delta_n:T_n(C)\rightarrow T_{n-1}(A).$$
+	Since $T_n(C)=0$ for $n\neq0$, we have a long exact sequence
+	\begin{align*}
+		\begin{CD}
+			\dots @>>> 0 @>\delta_1>> T_0(A) @>>> T_0(B) @>>> T_0(C) @>\delta_0>> 0 @>>> \dots
+		\end{CD}
+	\end{align*}
+	Let $f$ be a morphism of short exact sequences that maps $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ to $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$. Consider the following diagram:
+	\begin{align*}
+		\begin{CD}
+			T_n(C) @>\delta_n>> T_{n-1}(A) \\
+			@VVV		@VVV \\
+			T_n(C') @>\delta_n>> T_{n-1}(A').
+		\end{CD}
+	\end{align*}
+	This diagram commutes for all $n\in\Z$, since all $\delta_n$ are zero maps. \\
+	Now we know that the $T_n$'s define a homological $\delta$-functor, and we will show that this is a universal $\delta$-functor. \\
+	Let $S$ be another $\delta$-functor and let $f_0:S_0\rightarrow T_0$ be a natural transformation.
+	For $n\neq1$, the only possible natural transformation is $f_n:S_n\rightarrow T_n$, since $T_n$ is the trivial functor. \\
+	Therefore, $S$ is uniquely defined by $f_0$, and $T$ is a universal $\delta$-functor.
+\end{proof}

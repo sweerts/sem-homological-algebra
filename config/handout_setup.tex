@@ -1,0 +1,35 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+
+% Seitenränder
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	left=30mm,
+	right=30mm,
+	top=35mm,
+	bottom=35mm,
+}
+
+\usepackage[english]{babel}
+\usepackage{enumitem}
+
+% Etwas Farbe, man kann sogar per rgb Wert definieren
+\usepackage{color}
+\newcommand{\black}{\color{black}}
+\newcommand{\red}{\color{red}}
+\newcommand{\green}{\color{dgreen}}
+\newcommand{\blue}{\color{blue}}
+\newcommand{\magenta}{\color{magenta}}
+\definecolor{darkblue}{rgb}{0,0,.5}
+
+% Das macht, dass man im pdf auf die Verweise klicken kann
+\usepackage[colorlinks,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkblue]{hyperref}
+
+\input{config/templates/math.tex}
+
+% Bibliographie
+\usepackage[german=quotes]{csquotes}
+\usepackage[backend=biber, style=alphabetic, url=false, isbn=false, maxbibnames=99, giveninits=true]{biblatex}
+%\renewbibmacro{in:}{}
+\addbibresource{literatur.bib}
