@@ -1,2 +1,16 @@
 \section{Introduction}
-This talk is based on \citation{Wei95}.
+This talk is based on \cite{Wei94}.
+
+\begin{note}[Snake Lemma]\label{snake_lemma}
+	Let
+	\begin{align*}
+		\begin{CD}
+			0 @>>> A @>f>> B @>g>> C @>>> 0 \\
+			@.   @VaVV   @VbVV    @VcVV    @. \\
+			0 @>>> A' @>f'>> B' @>g'>> C' @>>> 0
+		\end{CD}
+	\end{align*}
+	be a commutative diagram with exact rows. \\
+	Then there is an exact sequence
+	$$0 \rightarrow \ker(a) \rightarrow \ker(b) \rightarrow \ker(c) \rightarrow \coker(a) \rightarrow \coker(b) \rightarrow \coker(c) \rightarrow 0.$$
+\end{note}
