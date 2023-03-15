@@ -1,1 +1,39 @@
 \subsection{Injective Resolutions}
+
+\begin{definition}
+	An object $I$ in an abelian category $\cat{A}$ is \textit{injective} if it satisfies the following universal lifting property: \\
+	Given an injection $F:A\rightarrow B$ and a map $\alpha:A\rightarrow I$, there exists at least one map $\beta:B\rightarrow I$ such that $\alpha=\beta\circ f$.
+	\begin{align*}
+		\xymatrix{
+			0 \ar[r] &A \ar[r]^f \ar[d]^\alpha & B \ar[ld]^{\exists\beta} \\
+			&I
+		}
+	\end{align*}
+	We say that $\cat{A}$ \textit{has enough injectives} if for every object $A$ in $\cat{A}$ there is an injection $A\rightarrow I$ with $I$ injective. Note that if $\{I_\alpha\}$ is a family of injectives, then the product $\prod I_\alpha$ is also injective.
+	The notion of injective module was invented by R. Baer in 1940, long before projective modules were thought of.
+\end{definition}
+
+\begin{criterion}[Baer]
+	A right $R$-module $E$ is injective iff for every right ideal $J$ of $R$, every map $J\rightarrow E$ can be extended to a map $R\rightarrow E$.
+\end{criterion}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	Let $R=\Z/m$. Then $R$ is an injective $R$-module.
+	Furthermore, $\Z/d$ is not an injective $R$-module when $d\vert m$ and some prime divides both $d$ and $m/d$
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{corollary}
+	Suppose that $R=\Z$, or more generally that $R$ is a principle ideal domain. An $R$-module $A$ is injective iff it is divisible, i. e., for every $r\neq0$ in $R$ and every $a\in A, a=br$ for some $b\in A$.
+\end{corollary}
+
+\begin{example}
+	The divisible abelian groups $\Q$ and $\Z_{p^\infty}=\Z[\frac{1}{p}]/\Z$ are injective ($\Z[\frac{1}{p}]$ is the group of rational numbers of the form $a/p^n,n\geq 1$). Every injective abelian group is a direct sum of these. In particular, the injective abelian group $\Q/\Z$ is isomorphic to $\bigoplus\Z_{p^\infty}$.
+\end{example}

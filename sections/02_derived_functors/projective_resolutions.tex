@@ -63,5 +63,96 @@
 \end{remark}
 
 \begin{lemma}
-	$M$ is projective iff $\hom(M,-)$ is an exact functor.
+	$M$ is projective iff $\Hom_{\cat{A}}(M,-)$ is an exact functor, i. e. iff the sequence 
+	$$0 \rightarrow \Hom(M,A) \rightarrow \Hom(M,B) \rightarrow \Hom(M,C) \rightarrow 0$$
+	is exact for every exact sequence $0\rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ in $\cat{A}$.
 \end{lemma}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{exercise}
+	A chain complex $P$ is a projective object in $\ch$ iff it is a split exact complex of projectives.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	If $\cat{A}$ has enough projectives, then so does the category $\ch(\cat{A})$ of chain complexes over $\cat{A}$.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{definition}
+	Let $M$ be an object of $\cat{A}$. A \textit{left resolution} of $M$ is a complex $P$ with $P_i=0$ for $i<0$, together with a map $\epsilon:P_0\rightarrow M$ such that the augmented complex
+	$$\dots \overset{d}{\longrightarrow} P_2 \overset{d}{\longrightarrow} P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon}{\longrightarrow} M \longrightarrow 0$$
+	is exact. It is a \textit{projective resolution} if each $P_i$ is projective.
+\end{definition}
+
+\begin{lemma}
+	Every $R$-module $M$ has a projective resolution. More generally, if an abelian category $\cat{A}$ has enough projectives, then every object $M$ in $\cat{A}$ has a projective resolution.
+\end{lemma}
+
+\begin{exercise}
+	If $P$ is a complex of projectives with $P_i=0$ for $i<0$, then a map $\epsilon:P_0\rightarrow M$ giving a resolution for $M$ is the same as a chain map $\epsilon:P\rightarrow M$, where $M$ is considered as a complex concentrated in degree zero.
+\end{exercise}
+
+\begin{theorem}[Comparison Theorem]
+	Let $P\overset{\epsilon}{\rightarrow} M$ be a projective resolution of $M$ and $f':M\rightarrow N$ a map in $\cat{A}$. Then for every resolution $Q\overset{\eta}{\rightarrow} N$ of $N$ there is a chain map $f:P\rightarrow Q$ lifting $f'$ in the sense that $\eta\circ f_0=f'\circ\epsilon$. The chain map $f$ is unique up to chain homotopy equivalence.
+	\begin{align*}
+		\xymatrix{
+			\dots \ar[r] &P_2 \ar[r] \ar[d]^{\exists} &P_1 \ar[r] \ar[d]^{\exists} &P_0 \ar[r]^{\epsilon} \ar[d]^{\exists} &M \ar[r] \ar[d]^{f'} &0 \\
+			\dots \ar[r] &Q_2 \ar[r] &Q_1 \ar[r] &Q_0 \ar[r]^{\eta} &N \ar[r] &0 
+		}
+	\end{align*}
+\end{theorem}
+
+\begin{porism}
+	In the proof we will see that the hypothesis that $P\rightarrow M$ is a projective resolution is too strong. It suffices to be given a chain complex
+	$$\dots \rightarrow P_2 \rightarrow P_1 \rightarrow P_0 \rightarrow M \rightarrow 0$$
+	with the $P_i$ projective. Then for every resolution $Q\rightarrow N$ of $N$, every map $M\rightarrow N$ lifts to a map $P\rightarrow Q$, which is unique up to chain homotopy.
+	This stronger version of the Comparison Theorem will be used in section 2.7 to construct the external product for $\tor$.
+\end{porism}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{lemma}[Horseshoe Lemma]
+	Suppose given a commutative diagram
+	\begin{align*}
+		\xymatrix{
+			& & & &0 \ar[d] & \\
+			\dots \ar[r] &P'_2 \ar[r] &P'_1 \ar[r] &P'_0 \ar[r]^{\epsilon'} &A' \ar[r] \ar[d]^{\iota_A} &0 \\
+			& & & &A \ar[d]^{\pi_A} & \\
+			\dots \ar[r] &P''_2 \ar[r] &P''_1 \ar[r] &P''_0 \ar[r]^{\epsilon''} &A'' \ar[r] \ar[d] &0 \\
+			& & & &0 & 
+		}
+	\end{align*}
+	where the column is exact and the rows are projective resolutions. Set $P_n:=P'_n\oplus P''_n$. Then the $P_n$ assemble to form a projective resolution $P$ of $A$ and the right hand column lifts to an exact sequence of complexes
+	$$0\rightarrow P' \overset{\iota}{\rightarrow} P \overset{\pi}{\rightarrow} P'' \rightarrow 0,$$
+	where $\iota_n:P'_n\rightarrow P_n$ and $\pi_n:P_n\rightarrow P''_n$ are the natural inclusion and projection, respectively.
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	There are maps $\lambda_n: P''_n\rightarrow P*_{n-1}$ such that
+	$$d=\begin{pmatrix}
+			d' & \lambda \\
+			0 & d'' \\
+	\end{pmatrix},
+	\quad\text{i. e.}\quad
+	d'\begin{pmatrix}p'\\p''\end{pmatrix}=
+		\begin{pmatrix}
+			d'(p')+\lambda(p'') \\
+			d''(p'')\\
+		\end{pmatrix}$$
+\end{exercise}
