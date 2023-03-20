@@ -37,3 +37,168 @@
 \begin{example}
 	The divisible abelian groups $\Q$ and $\Z_{p^\infty}=\Z[\frac{1}{p}]/\Z$ are injective ($\Z[\frac{1}{p}]$ is the group of rational numbers of the form $a/p^n,n\geq 1$). Every injective abelian group is a direct sum of these. In particular, the injective abelian group $\Q/\Z$ is isomorphic to $\bigoplus\Z_{p^\infty}$.
 \end{example}
+
+The category $\ab$ has enough injectives.
+Consider an abelian group $A$. Let $I(A)$ be the product of copies of the injective group $\Q/\Z$, indexed by $\Hom_{\ab}(A,\Q/\Z)$.
+Then $I(A)$ is injective, being a product of injectives, and there is a canonical map $e_A:A\rightarrow I(A)$.
+This is the desired injection of $A$ into an injective.
+
+\begin{exercise}
+	$e_A$ is an injection.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	An abelian group $A$ is zero iff $\Hom_{\ab}(A,\Q/\Z)=0$.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{remark}
+	It is easily verified, that if $\cat{A}$ is an abelian category, then $\cat{A}^{op}$ is also abelian.
+	The definition of injective is dual to the definition of projective, so the following result are easily deduced by arguing in $\cat{A}^{op}$.
+\end{remark}
+
+\begin{lemma}
+	Let $I$ be an object in an abelian category $\cat{A}$.
+	\begin{enumerate}[label=(\roman*)]
+		\item $I$ is injective in $\cat{A}$.
+		
+		\item $I$ is projective in $\cat{A}^{op}$.
+		
+		\item The contravarian functor $\Hom_\cat{A}(-,I)$ is exact, i. e. it takes short exact sequences in $\cat{A}$ to short exact sequences in $\ab$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{definition}
+	Let $M$ be an object of $\cat{A}$.
+	A \textit{right resolution} of $M$ is a cochain complex $I$ with $I^i=0$ for $i<0$ and a map $M\rightarrow I^0$ such that the augmented complex
+	$$0 \rightarrow M \rightarrow I^0 \overset{d}{\rightarrow} I^1 \overset{d}{\rightarrow} I^2 \overset{d}{\rightarrow} \dots$$
+	is exact.
+	This is the same as a cochain map $M\rightarrow I$, where $M$ is considered as a complex concentrated in degree $0$.
+	It is called an \textit{injective resolution} if each $I^i$ is injective.
+\end{definition}
+
+\begin{lemma}
+	If the abelian category $\cat{A}$ has enough injectives, then every object in $\cat{A}$ has an injective resolution.
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{theorem}[Comparison Theorem]
+	Let $N\rightarrow I$ be an injective resolution of $N$ and $f':M\rightarrow N$ a map in $\cat{A}$. Then for every resolution $M\rightarrow E$ there is a cochain map $F:E\rightarrow I$ lifting $f'$.
+	The map $f$ is unique up to cochain homotopy equivalence.
+	\begin{align*}
+		\xymatrix{
+			0 \ar[r] &M \ar[r] \ar[d]^{f'} &E^0 \ar[r] \ar[d]^{\exists} &E^1 \ar[r] \ar[d]^{\exists} &E^2 \ar[r] \ar[d]^{\exists} &\dots \\
+			0 \ar[r] &N \ar[r] &I^0 \ar[r] &I^1 \ar[r]^{\eta} &I^2 \ar[r] &\dots
+		}
+	\end{align*}
+\end{theorem}
+
+\begin{exercise}
+	$I$ is an injective object in the category of chain complexes iff $I$ is a split exact complex of injectives. \\
+	If $\cat{A}$ has enough injectives, then $\ch(\cat{A})$ of chain complexes over $\cat{A}$.
+\end{exercise}
+
+\begin{lemma}
+	For every right $R$-module $M$, the natural map
+	$$\tau:\Hom_{\ab}(M,A)\rightarrow\Hom_{mod-R}(M,\Hom_{\ab}(R,A))$$
+	is an isomorphism, where $(\tau f)(m)$ is the map $r\mapsto f(mr)$.
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{definition}
+	A pair of functors $L:\cat{A}\rightarrow\cat{B}$ and $R:\cat{B}\rightarrow\cat{A}$ are \textit{adjoint} if there is a natural bijection for all $A$ in $\cat{A}$ and $B$ in $\cat{B}$:
+	$$\tau = \tau_{AB}:\Hom_{\cat{B}}(L(A),B) \overset{\cong}{\rightarrow} \Hom_{\cat{A}}(A,R(B)).$$
+	Here, "natural" means that for all $f:A\rightarrow A'$ in $\cat{A}$ and $g:B\rightarrow B'$ in $\cat{B}$ the following diagram commutes:
+	\begin{align*}
+		\xymatrix{
+			\Hom_{\cat{B}}(L(A'),B) \ar[r]^{Lf^*} \ar[d]^{\tau} &\Hom_{\cat{B}}(L(A),B) \ar[r]^{g_*} \ar[d]^{\tau} &\Hom_{\cat{B}}(L(A),B') \ar[d]^{\tau} \\
+			\Hom_{\cat{A}}(A',R(B)) \ar[r]^{f^*} &\Hom_{\cat{A}}(A,R(B)) \ar[r]^{Rg_*} &\Hom_{\cat{A}}(A,R(B')).
+		}
+	\end{align*}
+	We call $L$ the \textit{left adjoint} and $R$ the \textit{right adjoint} of this pair.
+	The above lemma states that the forgetful functor from $mod-R$ to $\ab$ has $\Hom_{\ab}(R,-)$ as its right adjoint.
+\end{definition}
+
+\begin{proposition}\label{PresInj}
+	If an additive functor $R:\cat{B}\rightarrow\cat{A}$ is right adjoint to an exact functor $L:\cat{A}\rightarrow\cat{B}$ and $I$ is an injective object of $\cat{B}$, then $R(I)$ is an injective object of $\cat{A}$. (We say that $R$ preserves injectives.)
+	
+	Dually, if an additive functor $L:\cat{A}\rightarrow\cat{B}$ is left adjoint to an exact functor $R:\cat{B}\rightarrow\cat{A}$ and $P$ is a projective object of $\cat{A}$, then $L(P)$ is a projective object of $\cat{B}$. (We say that $L$ preserves projectives.)
+\end{proposition}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{corollary}
+	If $I$ is an injective abelian group, then $\Hom_{\ab}(R,I)$ is an injective $R$-module.
+\end{corollary}
+
+\begin{exercise}
+	If $M$ is an $R$-module, let $I(M)$ be the product of copies of $I_0=\Hom_{\ab}(R,\Q/\Z)$, indexed by the set $\Hom_R(M,I_0)$.
+	There is a canonical map $e_M:M\rightarrow I(M)$, which is an injection.
+	Being a product of injectives, $I(M)$ is an injective, so this proves that $R-mod$ has enough injectives.
+	An important consequence of this is that every $R$-module has an injective resolution.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{example}
+	The category $\sheaves(X)$ of abelian group sheaves on a topological space $X$ has enough injectives.
+	To see this, we need two constructions.
+	The \textit{stalk} of a sheaf $\mathcal{F}$ at a point $x\in X$ is the abelian group $\mathcal{F}_x = \underset{\longrightarrow}{\lim}\{\mathcal{F}(U):x\in U\}$.
+	"Stalk at $x$" is an exact functor from $\sheaves(X)$ to $\ab$.
+	If $A$ is an abelian group, the \textit{skyscraper sheaf} $x_*A$ at the point $x\in X$ is defined to be the presheaf
+	$$(x_*A)(U)=\left\{\begin{array}{ll}A & \text{if }x\in U \\ 0 & \text{otherwise}\end{array}\right.$$
+\end{example}
+
+\begin{exercise}
+	$x_*A$ is a sheaf and 
+	$$\Hom_{\ab}(\mathcal{F}_x,A) \cong \Hom_{\sheaves(X)}(\mathcal{F},x_*A)$$
+	for every sheaf $\mathcal{F}$.
+	Furthermore, if $A_x$ is an injective abelian group, then $x_*(A_x)$ is an injective object in $\sheaves(X)$ for each $x$, and $\prod_{x\in X} x_*(A_*)$ is also injective.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{example}
+	Let $I$ be a small category and $\cat{A}$ an abelian category.
+	If the product of any set of objects exists in $\cat{A}$ ($\cat{A}$ is complete) and $\cat{A}$ has enough injectives, we will show that the functor category $\cat{A}^I$ has enough injectives.
+	For each $k$ in $I$, the $k^\text{th}$ coordinate $A\mapsto A(k)$ is an exact functor from $\cat{A}^I$ to $A$. Given $A$ in $\cat{A}$, define the functor $k_*A:I\rightarrow\cat{A}$ by sending $i\in I$ to
+	$$k_*A(i)=\prod_{\Hom_{I}(i,k)}A.$$
+	If $\eta:i\rightarrow j$ is a map in $I$, the map $k_*A(i)\rightarrow k_*A(j)$ is determined by the index map $\eta^*:\Hom(j,k)\rightarrow \Hom(i,k)$.
+	That is, the coordinate $k_*A(i)\rightarrow A$ of this map corresponding to $\varphi\in\Hom(j,k)$ is the projection of $k_*A(i)$ onto the factor corresponding to $\eta^*\varphi=\varphi\eta\in\Hom(i,k)$.
+	If $f:A\rightarrow B$ is a map $k_*A\rightarrow k_*B$ defined slotwise.
+	In this way, $k_*$ becomes an additive functor from $\cat{A}$ to $\cat{A'}$, assuming that $\cat{A}$ has enough products for $k_*A$ to be defined.
+\end{example}
+
+\begin{exercise}
+	Let $\cat{A}$ be complete and with enough injectives.
+	Then $k_*$ is right adjoint to the $k^\text{th}$ coordinate functor, so that $k_*$ preserves injectives by \ref{PresInj}.
+	Furthermore, $\mathcal{A}^I$ has enough injectives.
+\end{exercise}
+
+\begin{exercise}
+	Let $\mathcal{A}$ be cocomplete and have enough projectives.
+	Then $\mathcal{I}^I$ has enough projectives.
+\end{exercise}
