@@ -1,1 +1,112 @@
 \subsection{Left Derived Functors}
+
+\begin{construction}
+	Let $\mathcal{F}:\cat{A}\rightarrow\cat{B}$ be a right exact functor between two abelian categories.
+	If $\cat{A}$ has enough projectives, we can construct the \textit{left derived functors} $L_iF$, $i\geq0$, of $F$ as follows.
+	If $A$ is an object of $\cat{A}$, choose (once and for all) a projective resolution $P\rightarrow A$ and define
+	$$L_iF(A)=H_i(F(P)).$$
+	Note that since $F(P_1)\rightarrow F(P_0) \rightarrow F(A) \rightarrow 0$ is exact, we always have $L_0F(A)\cong F(A)$.
+	The aim of this section is to show that the $L_*F$ form a universal homological $\delta$-functor.
+\end{construction}
+
+\begin{lemma}
+	The objects $L_iF(A)$ are well defined up to natural isomorphism.
+	That is, if $!\rightarrow A$ is a second projective resolution, then there is a canonical isomorphism:
+	$$L_iF(A)=H_i(F(P))\overset{\cong}{\rightarrow} H_i(F(Q)).$$
+	In particular, a different choice of the projective resolutions would yield new functors $\hat{L}_iF$, which are naturally isomorphic to the functors $L_iF$.
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{corollary}
+	If $A$ is projective, then $L_iF(A)=0$ for $i\neq 0$.
+\end{corollary}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{definition}[$F$-Acyclic Objects]\label{acycOb}
+	An object $Q$ is called $F$\textit{-acyclic}, if $L_iF(Q)=0$ for all $i\neq0$, that is, if the higher derived functors of $F$ vanish on $Q$.
+	Clearly, projectives are $F$-acyclic for every right exact functor $F$, but there are others; flat modules are acyclic for tensor products, for example.
+	An $F$-\textit{acyclic resolution} of $A$ is a left resolution $Q\rightarrow A$ for which each $Q_i$ is $F$-acyclic.
+	We will see later (using dimension shifting, exercise \ref{dimShift}) that we can also compute left derived functors from $F$-acyclic resolutions, that is, that $L_i(A) \cong H_i(F(Q))$ for any $F$-acyclic resolution $Q$ of $A$.
+\end{definition}
+
+\begin{lemma}
+	If $f:A'\rightarrow A$ is any map inf $\cat{A}$, there is a natural map $L_iF(f):L_iF(A')\rightarrow L_iF(A)$ for each $i$.
+\end{lemma}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	We will prove that $L_0F(f)=f$ under the identification $L_0F(A)\cong F(A)$.
+\end{exercise}
+
+\begin{theorem}
+	Each $L_iF$ is an additive functor from $\cat{A}$ to $\cat{B}$.
+\end{theorem}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}[Preserving derived functors]
+	If $U:\cat{B}\rightarrow\cat{C}$ is an exact functor, then
+	$$U(L_iF) \cong L_i(UF).$$
+	Forgetful functors such as $mod-R \rightarrow \ab$ are often exact, and it is often easier to compute the derived functors of UF due to the absence of cluttering restrictions.
+\end{exercise}
+
+\begin{theorem}
+	The derived functors $L_*F$ from a homological $\delta$-functor.
+\end{theorem}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}[Dimension shifting]\label{dimShift}
+	If $0\rightarrow M \rightarrow P \rightarrow A \rightarrow 0$ is exact with $P$ projective (or $F$-acyclic \ref{acycOb}), then $L_iF(A)\cong L_{i-1}F(M)$ for $i\geq 2$ and $L_1F(A)$ is the kernel of $F(M)\rightarrow F(P)$.
+	More generally, if
+	$$0 \rightarrow M_m \rightarrow P_m \rightarrow P_{m-1} \rightarrow \dots \rightarrow P_0 \rightarrow A \rightarrow 0$$
+	is exact with the $P_j$ projective (or $F$-acyclic), then $L_iF(A) \cong L_{i-m-1}F(M_m)$ for $i\geq m+2$ and $L_{m+1}(A)$ is the kernel of $F(M_m)\rightarrow F(P_m)$.
+	Furthermore, if $P\rightarrow A$ is an $F$-acyclic resolution of $A$, then $L_iF(A)=H_i(F(P))$.
+	
+	The object $M_m$, which obviously depends on the choices made, is called the \textit{$m^{\text{th}}$ syzgy} of $A$.
+	The word "syzgy" comes from astronomy, where it was originally used to describe the alignment of the Sun, Earth and Moon.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{theorem}
+	Assume that $\cat{A}$ has enough projectives. Then for any right exact functor $F:\cat{A}\rightarrow\cat{B}$, the derived functors $L_nF$ form a universal $\delta$-functor.
+\end{theorem}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	Homology $H_*:\ch_{\geq0})\cat{A}\rightarrow\cat{A}$ and cohomology $H^*:\ch^{\geq0}(\cat{A})\rightarrow\cat{A}$ are universal $\delta$-functors.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{exercise}
+	An additive functor $F:\cat{A}\rightarrow\cat{B}$ is called \textit{effaceable} if for each object $A$ of $\cat{A}$ there is a monomorphism $u:P\rightarrow A$ such that $F(u)=0$.
+	We call $F$ \textit{coeffaceable} if for every $A$ there is a surjection $u:P\rightarrow A$ sucht that $F(u)=0$.
+	If $T_*$ is a homological $\delta$-functor such that each $T_n$ is coeffaceable (except $T_0$), then $T_*$ is universal.
+	Dually, ff $T^*$ is a cohomological $\delta$-functor such that each $T^n$ is effaceable (except $T^0$), then $T^*$ is universal.
+\end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}
