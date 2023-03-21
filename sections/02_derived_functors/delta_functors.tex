@@ -5,29 +5,36 @@
 \end{notation}
 
 \begin{definition}
-	A (covariant) homological $\delta$-functor between $\mathcal{A}$ and $\mathcal{B}$ is a collection of additive functors $T_n:\mathcal{A}\rightarrow\mathcal{B}$ for $n\geq0$, together with morphisms
+	A (covariant) homological $\delta$-functor between $\mathcal{A}$ and $\mathcal{B}$ is a collection of additive functors $T_n:\mathcal{A}\rightarrow\mathcal{B}$ (resp. $\delta^n:\cat{A}\rightarrow\cat{B}$) for $n\geq0$, together with morphisms
 	$$\delta_n:T_n(C)\rightarrow T_{n-1}(A)$$
+	$$\text{(resp. } \delta^n:T^n(C)\rightarrow T^{n+1}(A)\text{)}$$
 	defined for each short exact sequence $0\rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ in $\mathcal{A}$.
-	We will assume that $T_n = 0$ for $n<0$. \\
+	We will assume that $T_n = T^n = 0$ for $n<0$. \\
 	The following two conditions are imposed:
 	\begin{enumerate}[label=\arabic*.]
 		\item For each short exact sequence $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$, there is a long exact sequence
-		$$\dots T_{n+1}(C) \overset{\delta}{\rightarrow} T_n(A) \rightarrow T_n(B) \rightarrow T_n(C) \overset{\delta}{\rightarrow} T_{n-1}(A) \dots$$
+		$$\dots \rightarrow T_{n+1}(C) \overset{\delta}{\longrightarrow} T_n(A) \rightarrow T_n(B) \rightarrow T_n(C) \overset{\delta}{\longrightarrow} T_{n-1}(A) \dots$$
+		(resp.
+		$$\dots \rightarrow T^{n-1}(C) \overset{\delta}{\longrightarrow} T^n(A) \rightarrow T^n(B) \rightarrow T^n(C) \overset{\delta}{\longrightarrow} T^{n+1}(A) \dots\text{).}$$
 		In particular, $T_0$ is right exact, and $T^0$ is left exact.
 		
 		\item For each morphism of short exact sequences from $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$ to $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$, the $\delta$'s give a commutative diagram
-		\begin{align*}
-			\begin{gathered}
-				\xymatrixcolsep{5pc}\xymatrixcolsep{2pc}\xymatrix{
-					T_n(C') \ar[r]^{\delta} \ar[d] & T_{n-1}(A') \ar[d] \\
-					T_n(C) \ar[r]^{\delta} & T_{n-1}(A). }
-			\end{gathered}
-		\end{align*}
+		\[
+			\vcenter{\xymatrix{
+				T_n(C') \ar[r]^{\delta} \ar[d] & T_{n-1}(A') \ar[d] \\
+				T_n(C) \ar[r]^{\delta} & T_{n-1}(A).
+			}}
+			\text{ resp. }
+			\vcenter{\xymatrix{
+				T^n(C') \ar[r]^{\delta} \ar[d] & T^{n+1}(A') \ar[d] \\
+				T^n(C) \ar[r]^{\delta} & T^{n+1}(A).
+			}}
+		\]
 	\end{enumerate}
 \end{definition}
 
 \begin{example}
-	Homology gives a homological $\delta$-functor $H_*$ from $\ch_{\geq0}\cat{A}$ to $\cat{A}$.
+	Homology gives a homological $\delta$-functor $H_*$ from $\ch_{\geq0}\cat{A}$ to $\cat{A}$; cohomology gives a cohomological $\delta$-functor $H^*$ from $\ch^{\geq0}(\cat{A})$ to $\cat{a}$.
 \end{example}
 
 \begin{exercise}
@@ -42,13 +49,12 @@
 \begin{proof}
 	Let $f:\mathcal{S}\rightarrow\mathcal{S}$ be a morphism of short exact sequences, and let $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$ (\textasteriskcentered') be the image of $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ (\textasteriskcentered) under $f$. \\
 	By definition, we know that
-	\begin{align*}
-		\begin{CD}
-			F(\textasteriskcentered) @= T_i(C) @>\delta>> T_{i-1}(A) @= G(\textasteriskcentered) \\
-			@.  				@VVF(f)V 			@VG(f)VV 			@. \\
-			F(\textasteriskcentered') @= T_i(C') @>\delta>> T_{i-1}(A') @= G(\textasteriskcentered').
-		\end{CD}
-	\end{align*}
+	\[
+		\xymatrix{
+			F(\textasteriskcentered) \ar@{=}[r] &T_i(C) \ar[r]^{\delta} \ar[d]^{F(f)} &T_{i-1}(A) \ar@{=}[r] \ar[d]^{G(f)} &G(\textasteriskcentered) \\
+			F(\textasteriskcentered') \ar@{=}[r] &T_i(C') \ar[r]^{\delta} &T_{i-1}(A') \ar@{=}[r] &G(\textasteriskcentered').
+		}
+	\]
 	commutes.
 	Therefore, $\delta_i$ is a natural transformation.
 \end{proof}
@@ -56,17 +62,18 @@
 \begin{example}[p-torsion]
 	If $p$ is an integer, the functors $T_0(A)=A/pA$ and 
 	$$T_1(A) = {_p}A \equiv \{a\in A:pa=0\}$$
-	fit together to form a homological $\delta$-functor, or a cohomological $\delta$-functor (with $T^0=T_1$ and $T^1=T_0$) from \textbf{Ab} to \textbf{Ab}.\\
+	fit together to form a homological $\delta$-functor, or a cohomological $\delta$-functor (with $T^0=T_1$ and $T^1=T_0$) from \ab\ to \ab.\\
 	We can apply the \hyperref[snake_lemma]{Snake Lemma} to the commutative diagram
-	\begin{align*}
-		\begin{CD}
-			0 @>>> A @>>> B @>>> C @>>> 0 \\
-			@.	 @VpVV	 @VpVV	@VpVV  @. \\
-			0 @>>> A @>>> B @>>> C @>>> 0 \\
-		\end{CD}
-	\end{align*}
+	\[
+		\xymatrix{
+			0 \ar[r] &A \ar[r] \ar[d]^p &B \ar[r] \ar[d]^p &C \ar[r] \ar[d]^p &0 \\
+			0 \ar[r] &A \ar[r] &B \ar[r] &C \ar[r] &0
+		}
+	\]
 	to get an exact sequence
 	$$0 \rightarrow {_p}A \rightarrow {_p}B \rightarrow {_p}C \overset{\delta}{\longrightarrow} A/pA \rightarrow B/pB \rightarrow C/pC \rightarrow 0.$$
+	\textit{Generalization.}
+	The same proof shows that if $r$ is any element in a ring $R$, then $T_0(M)=M/rM$ and $T_1(M)={_r}M$ fit together to form a homological $\delta$-functor (or cohomological $\delta$-functor, if that is one's taste) from $R$-\Rmod\ to \ab.
 \end{example}
 
 \begin{definition}
