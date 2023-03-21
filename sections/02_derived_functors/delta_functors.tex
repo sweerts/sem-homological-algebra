@@ -77,16 +77,24 @@
 \end{example}
 
 \begin{definition}
-	A \textit{morphism} $S \rightarrow T$ of $\delta$-functor is a system of natural transformations $S_n \rightarrow T_n$ (resp. $S^n \rightarrow T^n$) that commute with $\delta$, i. e. for every short exact sequence $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ the diagram
-	\begin{align*}
-		\begin{CD}
-			\dots @>>> S_{n+1}(C) @>\delta_{n+1}>> S_n(A) @>>> S_n(B) @>>> S_n(C) @>\delta_n>> \dots \\
-			@.			@VVV						@VVV		@VVV		@VVV				@. \\
-			\dots @>>> T_{n+1}(C) @>\delta_{n+1}>> T_n(A) @>>> T_n(B) @>>> T_n(C) @>\delta_n>> \dots			
-		\end{CD}
-	\end{align*}
-	commutes. \\
-	A homological $\delta$-functor $T$ is \textit{universal} if, given any other $\delta$-functor $S$ and a natural transformation $f_0:S_0\rightarrow T_0$, there exists a unique morphism $\{f_n:S_n\rightarrow T_n\}$ of $\delta$-functors extending $f_0$. \\
+	A \textit{morphism} $S \rightarrow T$ of $\delta$-functors is a system of natural transformations $S_n \rightarrow T_n$ (resp. $S^n \rightarrow T^n$) that commute with $\delta$, i. e. for every short exact sequence $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ the diagram
+	\[
+		\xymatrix{
+			\dots \ar[r] &S_{n+1}(C) \ar[r]^{\delta_{n+1}} \ar[d] &S_n(A) \ar[r] \ar[d] &S_n(B) \ar[r] \ar[d] &S_n(C) \ar[r]^{\delta_n} \ar[d] &S_{n-1}(A) \ar[r] \ar[d] &\dots \\
+			\dots \ar[r] &T_{n+1}(C) \ar[r]^{\delta_{n+1}} &T_n(A) \ar[r] &T_n(B) \ar[r] &T_n(C) \ar[r]^{\delta_n} &T_{n-1}(A) \ar[r] &\dots
+		}
+	\]
+	(resp.
+	\[
+		\xymatrix{
+			\dots \ar[r] &S^{n-1}(C) \ar[r]^{\delta^{n-1}} \ar[d] &S^n(A) \ar[r] \ar[d] &S^n(B) \ar[r] \ar[d] &S^n(C) \ar[r]^{\delta^n} \ar[d] &S^{n+1}(A) \ar[r] \ar[d] &\dots \\
+			\dots \ar[r] &T^{n-1}(C) \ar[r]^{\delta^{n-1}} &T^n(A) \ar[r] &T^n(B) \ar[r] &T^n(C) \ar[r]^{\delta^n} &T^{n+1}(A) \ar[r] &\dots)
+		}
+	\]
+	commutes.
+	
+	A homological $\delta$-functor $T$ is \textit{universal} if, given any other $\delta$-functor $S$ and a natural transformation $f_0:S_0\rightarrow T_0$, there exists a unique morphism $\{f_n:S_n\rightarrow T_n\}$ of $\delta$-functors extending $f_0$.
+	
 	A cohomological $\delta$-functor $T$ is \textit{universal} if, given any other $\delta$-functor $S$ and a natural transformation $f^0:S^0\rightarrow T^0$, there exists a unique morphism $T\rightarrow S$ of $\delta$-functors extending $f_0$.
 \end{definition}
 
@@ -102,22 +110,31 @@
 	Let $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ be a short exact sequence in $\cat{A}$. \\
 	Consider any morphism $$\delta_n:T_n(C)\rightarrow T_{n-1}(A).$$
 	Since $T_n(C)=0$ for $n\neq0$, we have a long exact sequence
-	\begin{align*}
-		\begin{CD}
-			\dots @>>> 0 @>\delta_1>> T_0(A) @>>> T_0(B) @>>> T_0(C) @>\delta_0>> 0 @>>> \dots
-		\end{CD}
-	\end{align*}
+	\[
+		\xymatrix{
+			\dots \ar[r] &0 \ar[r]^-{\delta_1} &T_0(A) \ar[r] &T_0(B) \ar[r] &T_0(C) \ar[r]^-{\delta_0} &0 \ar[r] &\dots
+		}
+	\]
 	Let $f$ be a morphism of short exact sequences that maps $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ to $0 \rightarrow A' \rightarrow B' \rightarrow C' \rightarrow 0$. Consider the following diagram:
-	\begin{align*}
-		\begin{CD}
-			T_n(C) @>\delta_n>> T_{n-1}(A) \\
-			@VVV		@VVV \\
-			T_n(C') @>\delta_n>> T_{n-1}(A').
-		\end{CD}
-	\end{align*}
+	\[
+		\xymatrix{
+			T_n(C) \ar[r]^{\delta_n} \ar[d] &T_{n-1}(A) \ar[d] \\
+			T_n(C') \ar[r]^{\delta_n} &T_{n-1}(A').
+		}
+	\]
 	This diagram commutes for all $n\in\Z$, since all $\delta_n$ are zero maps. \\
 	Now we know that the $T_n$'s define a homological $\delta$-functor, and we will show that this is a universal $\delta$-functor. \\
 	Let $S$ be another $\delta$-functor and let $f_0:S_0\rightarrow T_0$ be a natural transformation.
 	For $n\neq1$, the only possible natural transformation is $f_n:S_n\rightarrow T_n$, since $T_n$ is the trivial functor. \\
 	Therefore, $S$ is uniquely defined by $f_0$, and $T$ is a universal $\delta$-functor.
 \end{proof}
+
+\begin{remark}
+	If $F:\cat{A}\rightarrow\cat{B}$ is an additive functor, then we can ask if there is \textit{any} $\delta$-functor $T$ (universal or not) such that $T_0=F$ (resp. $T^0=F$).
+	One obvious obstruction is that $T_0$ must be right exact (resp. $T^0$ must be left exact).
+	By definition, however, we see that there is at most one (up to isomorphism) \textit{universal} $\delta$-functor $T$ with $T_0=F$ (resp. $T^0=F$).
+	If a universal $\delta$-functor $T$ exists, the $T_n$ are sometimes called \textit{left satellite functors} of $F$ (resp. the $T^n$ are called the \textit{left satellite functors} of $F$).
+	
+	We will see that derived functors, when they exist, are indeed universal $\delta$-functors.
+	For this we need the concept of projective and injective resolutions.
+\end{remark}
