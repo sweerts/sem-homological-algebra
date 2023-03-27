@@ -52,10 +52,15 @@
 	There are a lot of nice rings where every projective module is also free, e. g. $\Z$, fields and division rings.
 	But this is not always the case.
 	\begin{enumerate}[label=(\roman*)]
-		\item Consider a free ring $R=R_1\times R_2$. Then $P=R_1\times 0$ and $0\times R_2$ are projective as they are direct summands of $R$. \\
-		But $P$ is not free: \\
-		Let $\varphi:R_1\times R_2 \overset{\cong}{\longrightarrow} R$. Consider $(0,1)\in R_1\times R_2$.
-		Since $\varphi$ is an isomorphism, we know that $\varphi(0,1)\neq0$.
+		\item Consider the ring $R=\Z/\Z$.
+		$R$ is obviously free as an $R$-module.
+		Since $R=\Z/2\Z \oplus \Z/3\Z$, we know that $\Z/2\Z$ is a projective $R$-module as direct summand of a free module.
+		But $\Z/2\Z$ is not free, since it cannot be isomorphic to a free $R$-module, since these have either $1$ or at least $6$ elements.
+		
+		\item Consider the ring $R=M_n(F)$ of $n\times n$ matrices over a field $F$, acting on the column vector space $V=F^n$.
+		As a left $R$-module, $R$ is the direct sum of its columns, each of which is the left $R$-module $V$.
+		Hence $R\cong V\oplus\dots\oplus V$, and $V$ is projective as $R$-module.
+		Since any free $R$-module would have dimension $dn^2$ over $F$ for some cardinal number $d$, and $\dim_f(V)=n$, $V$ cannot be free over $R$.
 	\end{enumerate}
 \end{example}
 
@@ -64,6 +69,8 @@
 	We say that $\cat{A}$ \textit{has enough projectives} if for every object $A$ of $\cat{A}$ there is a surjection $P\rightarrow A$ with $P$ projective.
 \end{remark}
 
+We can characterize projective objects in a different way:
+
 \begin{lemma}
 	$M$ is projective iff $\Hom_{\cat{A}}(M,-)$ is an exact functor, i. e. iff the sequence 
 	$$0 \rightarrow \Hom(M,A) \rightarrow \Hom(M,B) \rightarrow \Hom(M,C) \rightarrow 0$$
@@ -71,15 +78,34 @@
 \end{lemma}
 
 \begin{proof}
-	
+	Suppose that $\Hom_{\cat{A}}(M,-)$ is an exact functor.
+	Let $g:B\rightarrow C$ be surjective and let $\gamma:M\rightarrow C$ be a map.
+	Since $\Hom_{\cat{A}}(M,-)$ is exact, $g_*:\Hom_{\cat{A}}(M,B)\rightarrow\Hom_{\cat{A}}(M,C)$ is surjective.
+	Therefore, we can lift $\gamma$ to $\gamma=g_*\beta=\gamma\circ\beta$ and $M$ has the universal lifting property. \\
+	Suppose that $M$ is projective.
+	Since $\Hom_{\cat{A}}(M,-)$ is a left exact functor, it suffices to show that $g_*$ is surjective for every short exact sequence as above.
+	Let $\gamma:M\rightarrow C$ be a map.
+	By the universal property, we can lift $\gamma$ to $\beta:M\rightarrow C$ such that $\gamma=g\circ\beta=g_*\beta$, i. e. $g_*$ is surjective.
 \end{proof}
 
+A chain complex $P$ in called \textit{chain complex of projectives}, if each $P_n$ is projective.
+It is possible that a chain complex of projectives is not a projective object in $\ch$.
+
 \begin{exercise}
-	A chain complex $P$ is a projective object in $\ch$ iff it is a split exact complex of projectives.
+	A chain complex $P$ is a projective object in $\ch$ if and only if it is a split exact complex of projectives.
 \end{exercise}
 
 \begin{proof}
-	content...
+	Let $P$ be a chain complex that is projective in $\ch$.
+	We have a short exact sequence \[0 \rightarrow P \rightarrow \cone(P) \overset{g}{\longrightarrow} P[-1] \rightarrow 0. \tag{$\ast$}\]
+	Since $P$ is projective, so is $P[-1]$.
+	Since $g$ is surjective, we can lift the identity $\id_{P[-1]}$ to the map $\beta:P[-1]\rightarrow\cone(P)$, i. e. $\id_{P[-1]}=g\circ\beta$.
+	Then ($\ast$) is a split exact sequence and we have an isomorphism $\cone(P) \cong P \oplus P[-1]$.
+	Since $\cone(P)$ is split exact, we know that
+	\[0 = H_n(\cone(P)) \cong H_n(P \oplus P[-1]) \cong H_n(P) \oplus H_n(P[-1]),\]
+	Therefore, $H_n(P)=0$ for all $n$ and $P$ is acyclic.
+	
+	\comment{We need to show that $P$ is split and that each $P_n$ is projective.}
 \end{proof}
 
 \begin{exercise}
@@ -87,7 +113,21 @@
 \end{exercise}
 
 \begin{proof}
-	content...
+	Let $\cat{A}$ have enough projectives.
+	Let $C$ be a chain complex in $\cat{A}$ with differentials $\delta$.
+	Then for every $C_n$ there is a projective $B_n$ such that $B_n \overset{f_n}{\longrightarrow} C_n \rightarrow 0$ is exact.
+	Since $B_n$ is projective, we can lift $\delta_n\circ f_n$ to $d^B_n: B_n \rightarrow B_{n-1}$ such that $\delta_n\circ f_n = f_{n-1}\circ d^B_n$. 
+	\comment{NEED TO SHOW: $d\circ d =0$.}
+	Now define $P_n := B_n \oplus B_{n+1}$ and $d_n: P_n \rightarrow P_{n-1}$ where $d_n(b_n,b_{n+1}) := (d^B_n(b_n), b_n - d^B_{n+1}(b_{n+1}))$.
+	This is a chain complex $P$, since $d_n \circ d_{n+1} = 0$:
+	\begin{align*}
+		d_n( d_{n+1}( b_{n+1}, b_{n+2} ) )
+		&= d_n( d'_{n+1}(b_{n+1}), b_{n+1} - d'_{n+2}({b_n+2})) \\
+		&= (d'_n(d'_{n+1}(b_{n+1})), d'_{n+1}(b_{n+1}) - d'_{n+1}(b_{n+1} - d'_{n+2}(b_{n+2}))) \\
+		&= (0, d'_{n+1}(b_{n+1}) - d'_{n+1}(b_{n+1}) + d'_{n+1}(d'_{n+2}(b_{n+2}))) \\
+		&= (0, 0).
+	\end{align*}
+	
 \end{proof}
 
 \begin{definition}

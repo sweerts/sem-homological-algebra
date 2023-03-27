@@ -14,3 +14,17 @@ This talk is based on \cite{Wei94}.
 	Then there is an exact sequence
 	$$0 \rightarrow \ker(a) \rightarrow \ker(b) \rightarrow \ker(c) \rightarrow \coker(a) \rightarrow \coker(b) \rightarrow \coker(c) \rightarrow 0.$$
 \end{note}
+
+\begin{definition}[Mapping Cone]
+	Let $f:B \rightarrow C$ be a map of chain complexes.
+	The \textit{mapping cone} of $f$ is the chain complex whose degree $n$ part is $B_{n-1} \oplus C_n$, i. e.
+	\[\dots \rightarrow B_{n} \oplus C_{n+1} \rightarrow B_{n-1} \oplus C_n \rightarrow B_{n-2} \oplus C_{n-1} \rightarrow \dots\]
+	The differential is given by
+	\[d(b,c) = (-d(b), d(c) - f(c)), \quad (b\in B_{n-1}, c\in C_n).\]
+	There is a short exact sequence $0 \rightarrow C \rightarrow \cone(f) \rightarrow B[-1] \rightarrow 0.$ \\
+	The mapping cone of $id_C$ (denoted by $\cone(C)$) is \textit{split exact}, i. e.
+	\begin{enumerate}[label=(\roman*)]
+		\item there are maps $s_n:C_n\rightarrow C_{n+1}$ such that $d=dsd$ ($C$ is \textit{split}),
+		\item $C$ is exact as a sequence (\textit{acyclic}).
+	\end{enumerate} 
+\end{definition}
