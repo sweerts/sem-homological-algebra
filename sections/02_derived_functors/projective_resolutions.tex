@@ -140,9 +140,34 @@ It is possible that a chain complex of projectives is not a projective object in
 	Every $R$-module $M$ has a projective resolution. More generally, if an abelian category $\cat{A}$ has enough projectives, then every object $M$ in $\cat{A}$ has a projective resolution.
 \end{lemma}
 
+\begin{proof}
+	Let the abelian category $\cat{A}$ have enough projectives and let $M$ be an object of $\cat{A}$.
+	Then take a projective object $P_0$ of $\cat{A}$ and a surjection $\epsilon_0:P_0 \rightarrow M$.
+	Let $k_0: K_0 \rightarrow P_0$ be the kernel of $\epsilon_0$.
+	Inductively, given an object $K_{n-1}$, we can choose a projective object $P_n$ and a surjection $\epsilon_n: P_n \rightarrow K_{n-1}$.
+	Then we let $K_n \rightarrow P_n$ be the kernel of $\epsilon_n$, and define $d_n$ to be the composition $P_n \rightarrow K_n \rightarrow P_{n-1}$, i. e. $d_n = k_{n-1}\circ\epsilon_{n}$.
+	Since $\epsilon_n$ is a surjection for every $n$, this gives us an exact complex
+	\[\dots \overset{d}{\longrightarrow} P_2 \overset{d}{\longrightarrow} P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon_0}{\longrightarrow} M \rightarrow 0.\]
+	Since the $P_n$ are projective objects, it is a projective resolution of $M$.
+\end{proof}
+
 \begin{exercise}
 	If $P$ is a complex of projectives with $P_i=0$ for $i<0$, then a map $\epsilon:P_0\rightarrow M$ giving a resolution for $M$ is the same as a chain map $\epsilon:P\rightarrow M$, where $M$ is considered as a complex concentrated in degree zero.
 \end{exercise}
+
+\begin{proof}
+	Let $P$ be a complex such that together with a map $\epsilon: P_0 \rightarrow M$ it is a projective resolution of $M$.
+	It suffices to show that the diagram
+	\[
+		\xymatrix{
+			P_1 \ar[r] \ar[d]^d &0 \ar[d] \\
+			P_0 \ar[r]^{\epsilon} &M
+		}
+	\]
+	commutes, since every other square commutes trivially.
+	But since $P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon}{\longrightarrow} M \rightarrow $ has to be exact (as $P$ with $\epsilon$ is a projective resolution of $M$), we know that $\epsilon\circ d = 0$, so the diagram commutes.
+	Therefore, we have a chain map $\epsilon: P \rightarrow M$.
+\end{proof}
 
 \begin{theorem}[Comparison Theorem]
 	Let $P\overset{\epsilon}{\rightarrow} M$ be a projective resolution of $M$ and $f':M\rightarrow N$ a map in $\cat{A}$. Then for every resolution $Q\overset{\eta}{\rightarrow} N$ of $N$ there is a chain map $f:P\rightarrow Q$ lifting $f'$ in the sense that $\eta\circ f_0=f'\circ\epsilon$. The chain map $f$ is unique up to chain homotopy equivalence.
@@ -154,16 +179,48 @@ It is possible that a chain complex of projectives is not a projective object in
 	\end{align*}
 \end{theorem}
 
+\begin{proof}
+	We will construct the $f_n$ and show their uniqueness by induction on $n$, thinking of $f_{-1}$ as $f'$.
+	Inductively, suppose that $f_i$ has been constructed for $i\leq n$, such that $f_{i-1}d=df_i$.
+	To construct $f_n$, we consider the $n$-cycles of $P$ and $Q$.
+	If $n=-1$, we set $Z_{-1}(P) = M$ and $Z_{-1}(Q) = N$; if $n \geq 0$, $f_n$ induces a map $f'_n: Z_n(P) \rightarrow Z_n(Q)$ via $f_{n-1}d=df_n$.
+	Therefore we have two diagrams with exact rows
+	\[
+		\vcenter{\xymatrix{
+				\dots \ar[r]^d &P_{n+1} \ar[r]^d \ar[d]^{\exists} &Z_n(P) \ar[r] \ar[d]^{f'_n} &0 \\
+				\dots \ar[r] &Q_{n+1} \ar[r]^d &Z_n(Q) \ar[r] &0
+		}}
+		\text{ and }
+		\vcenter{\xymatrix{
+				0 \ar[r] &Z_n(P) \ar[r] \ar[d]^{f'_n} &P_n \ar[r] \ar[d]^{f_n} &P_{n-1} \ar[d]^{f_{n-1}} \\
+				0 \ar[r] &Z_n(Q) \ar[r] &Q_n \ar[r] &Q_{n-1}.
+	}}
+	\]
+	Since $P_{n+1}$ is projective, we get a map $f_{n+1}: P_{n+1} \rightarrow Q_{n+1}$ such that $df_{n+1} = f'_nd = f_nd$.
+	This proves the existence of the chain map $f: P \rightarrow Q$.
+	
+	We need to show that $f$ is unique up to chain homotopy.
+	Let $g: P \rightarrow Q$ be another lift of $f'$ and let $h := f - g$.
+	We will construct a chain contraction $\{s_n: P_n \rightarrow Q_{n+1}\}$ oh $h$ by induction on $n$.
+	If $n<0$, then $P_0 = 0$, so we set $s_n = 0$.
+	If $n=0$, then $h_0$ sends $P_0$ to $Z_0(Q)=d(Q_1)$, since $\eta h_0 = \epsilon(f' - f') = 0$.
+	Since $P_0$ is projective, we can $h_0$ to the map $s_0: P_0 \rightarrow Q_1$ such that $h_0 = d s_0 = d s_0 + s_{-1} d$.
+	Inductively, suppose that we are given maps $s_i$, $i<n$, such that $d s_{n-1} = h_{n-1} - s_{n-1} d$.
+	Consider the map $h_n - s_{n-1} d: P_n \rightarrow Q_n$.
+	Then
+	\[d(h_n - s_{n-1} d) = d h_n - (h_{n-1} - s_{n-2} d) d = (dh - hd) + s_{n-2} d d = 0.\]
+	Therefore, $h_n - s_{n-1}d$ lands in $Z_n(Q)$, a quotient of of quotient of $Q_{n+1}$.
+	Since $P_n$ is projective, we get the desired map $s_n: P_n \rightarrow Q_{n+1}$ such that $d s_n = h_n - s_{n-1} d$.
+\end{proof}
+
 \begin{porism}
-	In the proof we will see that the hypothesis that $P\rightarrow M$ is a projective resolution is too strong. It suffices to be given a chain complex
+	In the proof we saw that the hypothesis that $P\rightarrow M$ is a projective resolution is too strong.
+	It suffices to be given a chain complex
 	$$\dots \rightarrow P_2 \rightarrow P_1 \rightarrow P_0 \rightarrow M \rightarrow 0$$
-	with the $P_i$ projective. Then for every resolution $Q\rightarrow N$ of $N$, every map $M\rightarrow N$ lifts to a map $P\rightarrow Q$, which is unique up to chain homotopy.
+	with the $P_i$ projective.
+	Then for every resolution $Q\rightarrow N$ of $N$, every map $M\rightarrow N$ lifts to a map $P\rightarrow Q$, which is unique up to chain homotopy.
 	This stronger version of the Comparison Theorem will be used in section 2.7 to construct the external product for $\tor$.
 \end{porism}
-
-\begin{proof}
-	content...
-\end{proof}
 
 \begin{lemma}[Horseshoe Lemma]
 	Suppose given a commutative diagram
