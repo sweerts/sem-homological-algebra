@@ -65,7 +65,7 @@
 \end{example}
 
 \begin{remark}
-	The category $\cat{A}$ of finite abelian groups is an abelian category with no projective objects. \\
+	The category $\cat{A}$ of finite abelian groups is an abelian category with no projective objects except $0$. \\
 	We say that $\cat{A}$ \textit{has enough projectives} if for every object $A$ of $\cat{A}$ there is a surjection $P\rightarrow A$ with $P$ projective.
 \end{remark}
 
@@ -152,25 +152,37 @@ It is possible that a chain complex of projectives is not a projective object in
 \end{proof}
 
 \begin{exercise}
-	If $P$ is a complex of projectives with $P_i=0$ for $i<0$, then a map $\epsilon:P_0\rightarrow M$ giving a resolution for $M$ is the same as a chain map $\epsilon:P\rightarrow M$, where $M$ is considered as a complex concentrated in degree zero.
+	If $P$ is a complex of projectives with $P_i=0$ for $i<0$, then a map $\epsilon:P_0\rightarrow M$ giving a resolution for $M$ is the same as a quasi-isomorphism $\epsilon:P\rightarrow M$, where $M$ is considered as a complex concentrated in degree zero.
 \end{exercise}
 
 \begin{proof}
 	Let $P$ be a complex such that together with a map $\epsilon: P_0 \rightarrow M$ it is a projective resolution of $M$.
-	It suffices to show that the diagram
+	Since $P_{n+1} \rightarrow P_n \rightarrow P_{n-1}$ is exact for all $n\geq1$, we know that $H_n(P)=0$ for these $n$.
+	Hence, $H_n(P) = 0 = H_n(M)$ for all $n \neq 1$.
+	For $n=0$, we know that $P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon_0}{\longrightarrow} M \rightarrow 0$ is exact, so $\im(d) = \ker(\epsilon_0)$.
+	Then $H_n(P) = P_0 / \im(d) = P_0 / \ker(\epsilon_0)$.
+	Since $\epsilon_{0*}$ is surjective, the \hyperref[FTH]{Fundamental Theorem on Homomorphisms} induces an isomorphism $\epsilon_{0*}: H_0(P)=P_0/\ker\epsilon_0 \rightarrow M = H_0(M)$.
+	Therefore, $\epsilon$ is a quasiisomorphism from $P$ to $M$.
+	
+	Conversely, let $\epsilon: P \rightarrow M$ be a quasiisomorphism.
+	Since $H_n(P) \cong H_n(M) = 0$ for all $n \geq 1$, we know that $P_{n+1} \rightarrow P_n \rightarrow P_{n-1}$ is exact.
+	Consider the commutative diagram
 	\[
 		\xymatrix{
-			P_1 \ar[r] \ar[d]^d &0 \ar[d] \\
-			P_0 \ar[r]^{\epsilon} &M
+			P_1 \ar[r]^-d &P_0 \ar[r]^{\epsilon_0} \ar[d]^-{\pi} &M \ar[r] &0 \\
+			&\faktor{P_0}{\im(d)} \ar[ur]_-{\cong} & &
 		}
 	\]
-	commutes, since every other square commutes trivially.
-	But since $P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon}{\longrightarrow} M \rightarrow $ has to be exact (as $P$ with $\epsilon$ is a projective resolution of $M$), we know that $\epsilon\circ d = 0$, so the diagram commutes.
-	Therefore, we have a chain map $\epsilon: P \rightarrow M$.
+	where $\iota$ is the inclusion and $\pi$ is the projection.
+	Since $P_0 / \im(d) = H_0(P) \cong M$, we know that $\ker\epsilon_0 = \ker\pi = \im d$.
+	Therefore, $P_1 \overset{d}{\longrightarrow} P_0 \overset{\epsilon_0}{\longrightarrow} M$ is exact.
+	Furthermore, since $\pi$ is surjective, we know that $\epsilon_0$ is surjective.
+	Therefore, $P_0 \overset{\epsilon:0}{\longrightarrow} M \rightarrow 0$ is exact.
+	Since all $P_n$, $n\geq 0$ are projective, we have a projective resolution $P \overset{\epsilon_0}{\longrightarrow} M$.
 \end{proof}
 
 \begin{theorem}[Comparison Theorem]
-	Let $P\overset{\epsilon}{\rightarrow} M$ be a projective resolution of $M$ and $f':M\rightarrow N$ a map in $\cat{A}$. Then for every resolution $Q\overset{\eta}{\rightarrow} N$ of $N$ there is a chain map $f:P\rightarrow Q$ lifting $f'$ in the sense that $\eta\circ f_0=f'\circ\epsilon$. The chain map $f$ is unique up to chain homotopy equivalence.
+	Let $P\overset{\epsilon}{\longrightarrow} M$ be a projective resolution of $M$ and $f':M\rightarrow N$ a map in $\cat{A}$. Then for every resolution $Q\overset{\eta}{\rightarrow} N$ of $N$ there is a chain map $f:P\rightarrow Q$ lifting $f'$ in the sense that $\eta\circ f_0=f'\circ\epsilon$. The chain map $f$ is unique up to chain homotopy equivalence.
 	\begin{align*}
 		\xymatrix{
 			\dots \ar[r] &P_2 \ar[r] \ar[d]^{\exists} &P_1 \ar[r] \ar[d]^{\exists} &P_0 \ar[r]^{\epsilon} \ar[d]^{\exists} &M \ar[r] \ar[d]^{f'} &0 \\
@@ -223,7 +235,7 @@ It is possible that a chain complex of projectives is not a projective object in
 \end{porism}
 
 \begin{lemma}[Horseshoe Lemma]
-	Suppose given a commutative diagram
+	Suppose given a diagram
 	\begin{align*}
 		\xymatrix{
 			& & & &0 \ar[d] & \\
@@ -233,17 +245,43 @@ It is possible that a chain complex of projectives is not a projective object in
 			& & & &0 & 
 		}
 	\end{align*}
-	where the column is exact and the rows are projective resolutions. Set $P_n:=P'_n\oplus P''_n$. Then the $P_n$ assemble to form a projective resolution $P$ of $A$ and the right hand column lifts to an exact sequence of complexes
-	$$0\rightarrow P' \overset{\iota}{\rightarrow} P \overset{\pi}{\rightarrow} P'' \rightarrow 0,$$
+	where the column is exact and the rows are projective resolutions. Set $P_n:=P'_n\oplus P''_n$. Then the $P_n$ assemble to form a projective resolution $P$ of $A$, and the right hand column lifts to an exact sequence of complexes
+	$$0\rightarrow P' \overset{\iota}{\longrightarrow} P \overset{\pi}{\longrightarrow} P'' \rightarrow 0,$$
 	where $\iota_n:P'_n\rightarrow P_n$ and $\pi_n:P_n\rightarrow P''_n$ are the natural inclusion and projection, respectively.
 \end{lemma}
 
 \begin{proof}
-	content...
+	Since $P''_0$ is projective, we can lift $\epsilon''$ to a map $P''_0 \rightarrow A$;
+	the direct sum of this with the map $\iota_A\epsilon: P'_0 \rightarrow A$ gives a map $\epsilon: P_0 \rightarrow A$.
+	Then the diagram ($\ast$) below commutes.
+	\[
+		\vcenter{\xymatrix{
+			&0 \ar[d] &0 \ar[d] &0 \ar[d] & \\
+			0 \ar[r] &\ker(\epsilon') \ar[r] \ar[d] &P'_0 \ar[r]^{\epsilon'} \ar[d] &A' \ar[r] \ar[d] &0 \\
+			0 \ar[r] &\ker(\epsilon) \ar[r] \ar[d] &P_0 \ar[r]^{\epsilon} \ar[d] &A \ar[r] \ar[d] &0 \\
+			0 \ar[r] &\ker(\epsilon'') \ar[r] \ar[d] &P''_0 \ar[r]^{\epsilon''} \ar[d] &A'' \ar[r] \ar[d] &0 \\
+			&0 &0 &0 &
+		}}
+		\tag{$\ast$}
+	\]
+	The right two columns of ($\ast$) are short exact sequences.
+	The \hyperref[snake_lemma]{Snake Lemma} shows that the left column is exact and that $\coker(\epsilon)=0$, so that $P_0$ maps surjectively onto $A$.
+	This finishes the initial step and brings us to the situation
+	\[
+		\xymatrix{
+			& &0 \ar[d] & \\
+			\dots \ar[r] &P'_1 \ar[r]^{d'} &\ker(\epsilon') \ar[r] \ar[d] &0 \\
+			& &\ker(\epsilon) \ar[d] & \\
+			\dots \ar[r] &P''_1 \ar[r]^{d''} &\ker(\epsilon'') \ar[r] \ar[d] &0 \\
+			& &0 &
+		}	
+	\]
+	The filling of the "horseshoe" now proceeds by induction.
+	\comment{Should I elaborate further?}
 \end{proof}
 
 \begin{exercise}
-	There are maps $\lambda_n: P''_n\rightarrow P*_{n-1}$ such that
+	There are maps $\lambda_n: P''_n\rightarrow P'_{n-1}$ such that
 	$$d=\begin{pmatrix}
 			d' & \lambda \\
 			0 & d'' \\
@@ -255,3 +293,7 @@ It is possible that a chain complex of projectives is not a projective object in
 			d''(p'')\\
 		\end{pmatrix}$$
 \end{exercise}
+
+\begin{proof}
+	content...
+\end{proof}

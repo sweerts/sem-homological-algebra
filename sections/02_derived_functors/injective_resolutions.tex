@@ -2,23 +2,35 @@
 
 \begin{definition}
 	An object $I$ in an abelian category $\cat{A}$ is \textit{injective} if it satisfies the following universal lifting property: \\
-	Given an injection $F:A\rightarrow B$ and a map $\alpha:A\rightarrow I$, there exists at least one map $\beta:B\rightarrow I$ such that $\alpha=\beta\circ f$.
+	Given an injection $f: A \rightarrow B$ and a map $\alpha:A\rightarrow I$, there exists at least one map $\beta:B\rightarrow I$ such that $\alpha=\beta\circ f$.
 	\begin{align*}
 		\xymatrix{
 			0 \ar[r] &A \ar[r]^f \ar[d]^\alpha & B \ar[ld]^{\exists\beta} \\
 			&I
 		}
 	\end{align*}
-	We say that $\cat{A}$ \textit{has enough injectives} if for every object $A$ in $\cat{A}$ there is an injection $A\rightarrow I$ with $I$ injective. Note that if $\{I_\alpha\}$ is a family of injectives, then the product $\prod I_\alpha$ is also injective.
-	The notion of injective module was invented by R. Baer in 1940, long before projective modules were thought of.
+	We say that $\cat{A}$ \textit{has enough injectives} if for every object $A$ in $\cat{A}$ there is an injection $A\rightarrow I$ with $I$ injective. 
 \end{definition}
 
+\begin{note}
+	If $\{I_\alpha\}$ is a family of injectives, then the product $\prod I_\alpha$ is also injective.
+	The notion of injective module was invented by R. Baer in 1940, long before projective modules were thought of.
+\end{note}
+
 \begin{criterion}[Baer]
-	A right $R$-module $E$ is injective iff for every right ideal $J$ of $R$, every map $J\rightarrow E$ can be extended to a map $R\rightarrow E$.
+	A right $R$-module $E$ is injective if and only if for every right ideal $J$ of $R$, every map $J\rightarrow E$ can be extended to a map $R\rightarrow E$.
 \end{criterion}
 
 \begin{proof}
-	content...
+	If $E$ is injective and $J$ a right ideal of $R$, then every map $J \rightarrow E$ can be lifted to a map $R \rightarrow E$.
+	
+	Conversely, suppose that every map $J \rightarrow E$ from a right ideal $J$ of $R$ can be extended to a map $R \rightarrow E$.
+	Let $\mathcal{E}$ be the set of all extensions $\alpha': A' \rightarrow E$ where $A \subseteq A' \subseteq B$ is a submodule.
+	This set can be partially ordered by $a' \leq a''$ if $a''$ extends $a'$.
+	Using \hyperref[zorn]{Zorn's Lemma}, we get a maximal extension $\alpha': A' \rightarrow E$ in $\mathcal{E}$.
+	Suppose there is a $b \in B\setminus A'$.
+	Then $J = \{r \in R : br \in A'\}$ is a right ideal of $R$, hence the map $J \overset{b}{\longrightarrow} A' \overset{\alpha'}{\longrightarrow} E$ extends to a map $f: R \rightarrow E$.
+	\comment{HELP!}
 \end{proof}
 
 \begin{exercise}
@@ -27,12 +39,43 @@
 \end{exercise}
 
 \begin{proof}
-	content...
+	We need to show that $\varphi: I \rightarrow \Z/m\Z$ can be extended to $\bar{\varphi}: \Z/m\Z \rightarrow \Z/m\Z$ for every ideal $I$ of $\Z/m\Z$.
+	Let $I$ be an ideal of $\Z/m\Z$.
+	Then $I$ is of the form $d\Z/m\Z \cong \Z/(\frac{m}{d})\Z$ for some $d \vert m$.
+	Since \[\frac{m}{d}f(1) = f(\frac{m}{d}) = f(0) = 0,\]
+	we know that $f(1) \in d\Z$, otherwise $\varphi$ would not be a well-defined morphism.
+	Now we can extend $f$ to a morphism $\bar{f}: \Z/m\Z \rightarrow \Z/m\Z$ via $1 \mapsto \frac{f(1)}{d}$.
+	This is well-defined, since $d \vert f(1)$.
+	By Baer's Criterion, $\Z/m\Z$ is an injective $\Z/m\Z$-module.
+	
+	Let $d\vert m$ such that there is a prime with $p \vert d$ and $p \vert \frac{m}{d}$.
+	Let $f: \Z/p \rightarrow \Z/m$ be the map $1 \mapsto \frac{m}{p}$.
+	Let $g: \Z/p \rightarrow \Z/d$ be the map $1 \mapsto \frac{d}{p}$.
+	Since $\ker(f) = \{x \in \Z/p : p \vert x\} = \{0\}$ and $\ker(g) = \{x \in \Z/p : p \vert x\} = \{0\}$, we know that $f$ and $g$ are injective.
+	Now consider any map $h: \Z/m \rightarrow \Z/d$.
+	Then any multiple of $d$ in $\Z/m$ gets send to $0$, since $h(d\cdot a) = d \cdot h(a) = 0$ in $\Z/d$.
+	We also know that $p \vert \frac{m}{d}$.
+	Then $d \vert \frac{m}{p}$, and therefore $h\circ f= 0$, which proves that $h\circ f \neq g$ for all $h$.
+	Therefore $\Z/d$ cannot be an injective.
 \end{proof}
 
 \begin{corollary}
 	Suppose that $R=\Z$, or more generally that $R$ is a principle ideal domain. An $R$-module $A$ is injective iff it is divisible, i. e., for every $r\neq0$ in $R$ and every $a\in A, a=br$ for some $b\in A$.
 \end{corollary}
+
+\begin{proof}
+	Let $R$ be a principle ideal domain and let $A$ be an $R$-module.
+	Suppose that $A$ is injective.
+	Let $r \in R\setminus\{0\}$ an let $a \in A$.
+	Consider the homomorphism $f: R \rightarrow R$, $1 \mapsto r$.
+	Since $r\neq0$ and $R$ is a principal ideal domain, we know that $f(x) = rx  = 0 \iff x = 0$.
+	Hence, $f$ is injective.
+	Now consider the map $\alpha: R \rightarrow A$, $1 \mapsto a$.
+	We can lift $\alpha$ to the map $\beta: R \rightarrow A$, i. e. $\alpha = \beta\circ f$.
+	We then know
+	\[a = \alpha(1) = \beta(f(1)) = \beta(r) = r \cdot \beta(1).\]
+	Conversely, \comment{I still need to prove the other direction.}
+\end{proof}
 
 \begin{example}
 	The divisible abelian groups $\Q$ and $\Z_{p^\infty}=\Z[\frac{1}{p}]/\Z$ are injective ($\Z[\frac{1}{p}]$ is the group of rational numbers of the form $a/p^n,n\geq 1$). Every injective abelian group is a direct sum of these. In particular, the injective abelian group $\Q/\Z$ is isomorphic to $\bigoplus\Z_{p^\infty}$.
@@ -64,19 +107,67 @@ This is the desired injection of $A$ into an injective.
 	The definition of injective is dual to the definition of projective, so the following result are easily deduced by arguing in $\cat{A}^{op}$.
 \end{remark}
 
+\begin{proof}
+	Let $\cat{A}$ be an abelian category.
+	For every diagram
+	\[
+		\xymatrix{
+			A \ar[r]^f &B \ar@<-.5ex>[r]_g \ar@<.5ex>[r]^{g'} &C \ar[r]^h &D
+		}
+	\]
+	in $\cat{A}^{op}$ we have $f \in \Hom_{\cat{A}}(B, A)$, $g,g' \in \Hom_{\cat{A}}(C, B)$ and $h \in \Hom_{\cat{A}}(D,C)$.
+	Since $\cat{A}$ is an $\ab$-category, we know that $f(g+g')h = fgh + fg'h$ in $\cat{A}$.
+	Therefore, we know $h(g+g')h = hgf + hg'f$ in $\cat{A}^{op}$, and $\cat{A}^{op}$ is an $\ab$-category.
+	
+	We know that $\Hom_{\cat{A}^{op}}(0,X) = \Hom_{\cat{A}}(X,0)$ for all $X \in \Ob(\cat{A}^{op})$ and $\Hom_{\cat{A}^{op}}(X,0) = \Hom_{\cat{A}}(0,X)$ for all $X \in \Ob(\cat{A}^{op})$.
+	Therefore, $0$ is a zero object in $\cat{A}^{op}$.
+	Let $B,C$ be two objects of $\cat{A}^{op}$.
+	Since $\cat{A}$ is an additive category, the coproduct $B\coprod C$ exists in $\cat{A}$ and coincides with the product $B\times C$.
+	By duality, the product and coproduct of $B$ and $C$ exist in $\cat{A}^{op}$ and they coincide.
+	Therefore, $\cat{A}^{op}$ is an additive category.
+	
+	Let $f \in \Hom_{\cat{A}^{op}}(B,C)$ be a morphism.
+	Then $f$ is a morphism in $\Hom_{\cat{A}}(C,B)$ and has a kernel and cokernel in $\cat{A}$.
+	By duality, $f$ has a cokernel and kernel in $\cat{A}^{op}$.
+	Let $f$ be a monomorphism in $\cat{A}^{op}$.
+	Then $f$ is an epimorphism in $\cat{A}$ is the cokernel of its kernel.
+	By duality, $f$ is the kernel of its cokernel in $\cat{A}^{op}$.
+	Let $f$ be an epimorphism in $\cat{A}^{op}$.
+	Then $f$ is a monomorphism in $\cat{A}$ is the kernel of its cokernel.
+	By duality, $f$ is the cokernel of its kernel in $\cat{A}^{op}$.
+	Therefore, $\cat{A}^{op}$ is an abelian category.
+\end{proof}
+
 \begin{lemma}
-	Let $I$ be an object in an abelian category $\cat{A}$.
+	Let $I$ be an object in an abelian category $\cat{A}$. The following statements are equivalent:
 	\begin{enumerate}[label=(\roman*)]
 		\item $I$ is injective in $\cat{A}$.
 		
 		\item $I$ is projective in $\cat{A}^{op}$.
 		
-		\item The contravarian functor $\Hom_\cat{A}(-,I)$ is exact, i. e. it takes short exact sequences in $\cat{A}$ to short exact sequences in $\ab$.
+		\item The contravariant functor $\Hom_\cat{A}(-,I)$ is exact, i. e. it takes short exact sequences in $\cat{A}$ to short exact sequences in $\ab$.
 	\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-	content...
+	Let $I$ be an injective object in $\cat{A}$.
+	It is easy to see, that $I$ must be a projective object in $\cat{A}^{op}$.
+	\[
+		\vcenter{\xymatrix{
+			0 \ar[r] &A \ar[r]^f \ar[d]^\alpha & B \ar[ld]^{\exists\beta} \\
+			&I
+		}}
+		\quad\text{in $\cat{A}$ becomes}\quad
+		\vcenter{\xymatrix{
+			0  &A \ar[l]   & B \ar[l]^f  \\
+			&I \ar[u]^\alpha \ar[ru]_{\exists\beta}
+		}}
+	\quad\text{in $\cat{A}^{op}$}
+	\]
+	Similarly, a projective object in $\cat{A}^{op}$ is an injective object in $(\cat{A}^{op})^{op} = \cat{A}^{op}$.
+	
+	The third statement can also be viewed in $\cat{A}^{op}$.
+	It is equivalent to the followinstatement
 \end{proof}
 
 \begin{definition}
