@@ -17,20 +17,34 @@
 	The notion of injective module was invented by R. Baer in 1940, long before projective modules were thought of.
 \end{note}
 
-\begin{criterion}[Baer]
+\begin{criterion}[Baer] \label{baer}
 	A right $R$-module $E$ is injective if and only if for every right ideal $J$ of $R$, every map $J\rightarrow E$ can be extended to a map $R\rightarrow E$.
 \end{criterion}
 
 \begin{proof}
 	If $E$ is injective and $J$ a right ideal of $R$, then every map $J \rightarrow E$ can be lifted to a map $R \rightarrow E$.
 	
-	Conversely, suppose that every map $J \rightarrow E$ from a right ideal $J$ of $R$ can be extended to a map $R \rightarrow E$.
-	Let $\mathcal{E}$ be the set of all extensions $\alpha': A' \rightarrow E$ where $A \subseteq A' \subseteq B$ is a submodule.
-	This set can be partially ordered by $a' \leq a''$ if $a''$ extends $a'$.
-	Using \hyperref[zorn]{Zorn's Lemma}, we get a maximal extension $\alpha': A' \rightarrow E$ in $\mathcal{E}$.
-	Suppose there is a $b \in B\setminus A'$.
-	Then $J = \{r \in R : br \in A'\}$ is a right ideal of $R$, hence the map $J \overset{b}{\longrightarrow} A' \overset{\alpha'}{\longrightarrow} E$ extends to a map $f: R \rightarrow E$.
-	\comment{HELP!}
+	Conversely, let $B$ be an $R$-module and let $A$ be a submodule of $B$.
+	Let $\alpha: A \rightarrow E$ be a map.
+	We need to extend $\alpha$ to a map $\alpha'': B \rightarrow E$.
+	Let $\mathcal{E}$ be the set of all extensions of $\alpha$, partially ordered by $(\alpha_1, A_1) \leq (\alpha_2, A_2) \iff A_1 \subseteq A_2$ and $\alpha_2\vert_{A_1} = \alpha_1$.
+	Zorn's lemma gives us a maximal extension $\alpha': A' \rightarrow E$.
+	Suppose there is a $b \in B \setminus A'$.
+	Then $J := \{r \in R \vert br \in A'\}$ is a right ideal of $R$.
+	By assumption, we can extend the composition $J \overset{b}{\longrightarrow} A' \overset{\alpha'}{\longrightarrow} E$ to a map $f: R \rightarrow E$.
+	Let $A'' = A' + bR$ be a submodule of $B$ and define $\alpha'': A'' \rightarrow E$ by
+	\[\alpha''(a + br) := \alpha'(a) + f(r),\]
+	where $a \in A'$ and $r \in R$.
+	We need to show that this is a well-defined map.
+	Assume that $a_0 + br_0 = a_1 + br_1$ with $a_0, a_1 \in A'$ and $r_0, r_1 \in R$.
+	Then $b(r_0 - r_1) = a_1 - a_0 \in A'$, hence $r_0 - r_1 \in J$.
+	Then we can see that
+	\[\alpha'(a_1) - \alpha'(a_0) = \alpha'(a_1 - a_0) = \alpha'(b(r_0 - r_1)) = f(r_0 - r_1) = f(r_0) - f(r_1).\]
+	Therefore, $\alpha'(a_1) + f(r_1) = \alpha'(a_0) + f(r_0)$, hence $\alpha''$ is well-defined.
+	Let $a \in A'$.
+	Then $\alpha''(a) = \alpha'(a)$, hence $\alpha''\vert_{A'} = \alpha_1$.
+	Since we assumed that $A' \subsetneq B$, this contradicts the maximality of $\alpha'$.
+	Therefore, $A' = B$ and we can conclude that $E$ is injective.
 \end{proof}
 
 \begin{exercise}
@@ -65,6 +79,7 @@
 
 \begin{proof}
 	Let $R$ be a principle ideal domain and let $A$ be an $R$-module.
+	
 	Suppose that $A$ is injective.
 	Let $r \in R\setminus\{0\}$ an let $a \in A$.
 	Consider the homomorphism $f: R \rightarrow R$, $1 \mapsto r$.
@@ -74,7 +89,14 @@
 	We can lift $\alpha$ to the map $\beta: R \rightarrow A$, i. e. $\alpha = \beta\circ f$.
 	We then know
 	\[a = \alpha(1) = \beta(f(1)) = \beta(r) = r \cdot \beta(1).\]
-	Conversely, \comment{I still need to prove the other direction.}
+	
+	Conversely, let $J$ be any ideal of $R$ and let $f: J \rightarrow A$ be any map.
+	Since $R$ is a principle ideal domain, there is a generator $r \in R$ of $J$.
+	If $r=0$, the zero map $R \rightarrow A$ extends the map $0 = J \rightarrow A$.
+	If $r \neq 0$, then there is a $b \in A$ such that $f(b) = br$, since $A$ is divisible.
+	Consider $\beta: R \rightarrow A$, $1 \mapsto b$.
+	Then \[\beta(rk) = b(rk) = (br)k = f(r)k = f(rk),\] hence $\beta$ extends $f$.
+	By \hyperref[baer]{Baer's Criterion}, $A$ is injective.
 \end{proof}
 
 \begin{example}
@@ -167,7 +189,7 @@ This is the desired injection of $A$ into an injective.
 	Similarly, a projective object in $\cat{A}^{op}$ is an injective object in $(\cat{A}^{op})^{op} = \cat{A}^{op}$.
 	
 	The third statement can also be viewed in $\cat{A}^{op}$.
-	It is equivalent to the followinstatement
+	It is equivalent to the statement
 \end{proof}
 
 \begin{definition}
